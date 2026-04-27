@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Cálculo de IMC</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; padding-top: 50px; background-color: #f0f2f5; }
+        .resultado-container { background: white; display: inline-block; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: #1a73e8; }
+        p { font-size: 1.2rem; color: #3c4043; }
+        .destaque { font-weight: bold; color: #d93025; }
+    </style>
+</head>
+<body>
+
+    <div class="resultado-container">
+        <h2>Resultado do IMC</h2>
+        <div id="saida">
+            Carregando informações...
+        </div>
+    </div>
+
+    <script>
+        let nome = prompt("Digite seu nome:");
+
+        let alturaCm = prompt("Digite sua altura em centímetros (ex: 175):");
+
+        let pesoKg = prompt("Digite seu peso em kg (ex: 70.5):");
+
+        alturaCm = parseFloat(alturaCm);
+        pesoKg = parseFloat(pesoKg);
+
+        let alturaM = alturaCm / 100;
+
+        let m = pesoKg / (alturaM * alturaM);
+
+        let classificacao = "";
+
+        if (m < 16) {
+            classificacao = "Baixo peso muito grave";
+        } else if (m >= 16 && m <= 16.99) {
+            classificacao = "Baixo peso grave";
+        } else if (m >= 17 && m <= 18.49) {
+            classificacao = "Baixo peso";
+        } else if (m >= 18.50 && m <= 24.99) {
+            classificacao = "Peso normal";
+        } else if (m >= 25 && m <= 29.99) {
+            classificacao = "Sobrepeso";
+        } else if (m >= 30 && m <= 34.99) {
+            classificacao = "Obesidade grau I";
+        } else if (m >= 35 && m <= 39.99) {
+            classificacao = "Obesidade grau II";
+        } else {
+            classificacao = "Obesidade grau III";
+        }
+
+        document.getElementById('saida').innerHTML = `
+            <p><strong>${nome}</strong> possui índice de massa corporal igual a <strong>${m.toFixed(2)}</strong>, 
+            sendo classificado como: <br><br> <span class="destaque">${classificacao}</span>.</p>
+        `;
+    </script>
+</body>
+</html>
